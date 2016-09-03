@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11198.2" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ZoomingScrollView" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSZ-sD-VLG">
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ZH-EQ-yUQ">
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lattice.png" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-u6-LqK"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLE-lX-OV5" userLabel="Location1 View" customClass="LocationView" customModule="ZoomingScrollView" customModuleProvider="target">
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="point.png" translatesAutoresizingMaskIntoConstraints="NO" id="cGG-85-smB"/>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.64978682994842529" green="0.92249053716659546" blue="0.92398911714553833" alpha="0.50369073275862064" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="cGG-85-smB" firstAttribute="leading" secondItem="zLE-lX-OV5" secondAttribute="leading" id="3KB-v9-511"/>
+                                                    <constraint firstAttribute="bottom" secondItem="cGG-85-smB" secondAttribute="bottom" id="4kx-Ay-lNW"/>
+                                                    <constraint firstItem="cGG-85-smB" firstAttribute="top" secondItem="zLE-lX-OV5" secondAttribute="top" id="Gcu-IT-M14"/>
+                                                    <constraint firstAttribute="trailing" secondItem="cGG-85-smB" secondAttribute="trailing" id="QR2-dX-bvw"/>
+                                                    <constraint firstAttribute="width" constant="120" id="ZJ4-pY-fFp"/>
+                                                    <constraint firstAttribute="width" secondItem="zLE-lX-OV5" secondAttribute="height" multiplier="999:1782" id="x05-fv-Gpn"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IN0-Xj-9ku" userLabel="Location2 View" customClass="LocationView" customModule="ZoomingScrollView" customModuleProvider="target">
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="point.png" translatesAutoresizingMaskIntoConstraints="NO" id="SIb-BG-aBI"/>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.64978682994842529" green="0.92249053716659546" blue="0.92398911714553833" alpha="0.50369073279999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="SIb-BG-aBI" secondAttribute="trailing" id="IBG-fJ-que"/>
+                                                    <constraint firstAttribute="bottom" secondItem="SIb-BG-aBI" secondAttribute="bottom" id="g3i-tv-d33"/>
+                                                    <constraint firstItem="SIb-BG-aBI" firstAttribute="top" secondItem="IN0-Xj-9ku" secondAttribute="top" id="lFE-Wb-VVe"/>
+                                                    <constraint firstAttribute="width" secondItem="IN0-Xj-9ku" secondAttribute="height" multiplier="999:1782" id="ofq-ru-Z0C"/>
+                                                    <constraint firstItem="SIb-BG-aBI" firstAttribute="leading" secondItem="IN0-Xj-9ku" secondAttribute="leading" id="pG9-LJ-fZi"/>
+                                                    <constraint firstAttribute="width" constant="120" id="qGU-dV-xGO"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="oIK-u6-LqK" firstAttribute="top" secondItem="9ZH-EQ-yUQ" secondAttribute="top" id="3Vu-9X-h7G"/>
+                                            <constraint firstItem="oIK-u6-LqK" firstAttribute="leading" secondItem="9ZH-EQ-yUQ" secondAttribute="leading" id="SJl-3X-YFk"/>
+                                            <constraint firstItem="zLE-lX-OV5" firstAttribute="top" secondItem="9ZH-EQ-yUQ" secondAttribute="top" id="YpH-NZ-y64"/>
+                                            <constraint firstAttribute="bottom" secondItem="IN0-Xj-9ku" secondAttribute="bottom" id="cJX-xo-0Sl"/>
+                                            <constraint firstItem="zLE-lX-OV5" firstAttribute="leading" secondItem="9ZH-EQ-yUQ" secondAttribute="leading" id="hTj-UW-ffd"/>
+                                            <constraint firstAttribute="trailing" secondItem="oIK-u6-LqK" secondAttribute="trailing" id="ifb-NR-gde"/>
+                                            <constraint firstAttribute="trailing" secondItem="IN0-Xj-9ku" secondAttribute="trailing" id="jsg-Cy-l3D"/>
+                                            <constraint firstAttribute="bottom" secondItem="oIK-u6-LqK" secondAttribute="bottom" id="nHE-OA-4Wm"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="9ZH-EQ-yUQ" secondAttribute="trailing" id="3uG-HZ-Lr9"/>
+                                    <constraint firstItem="9ZH-EQ-yUQ" firstAttribute="width" secondItem="QSZ-sD-VLG" secondAttribute="width" multiplier="5" constant="1" id="Ac6-sX-FC4"/>
+                                    <constraint firstItem="9ZH-EQ-yUQ" firstAttribute="height" secondItem="QSZ-sD-VLG" secondAttribute="height" multiplier="5" constant="1" id="C3Q-LF-dRo"/>
+                                    <constraint firstItem="9ZH-EQ-yUQ" firstAttribute="top" secondItem="QSZ-sD-VLG" secondAttribute="top" id="Cnu-yH-UNy"/>
+                                    <constraint firstItem="9ZH-EQ-yUQ" firstAttribute="leading" secondItem="QSZ-sD-VLG" secondAttribute="leading" id="Z7R-Zp-z4X"/>
+                                    <constraint firstAttribute="width" secondItem="QSZ-sD-VLG" secondAttribute="height" multiplier="1:1" id="aPM-Q5-wzG"/>
+                                    <constraint firstAttribute="bottom" secondItem="9ZH-EQ-yUQ" secondAttribute="bottom" id="xTl-1V-qiU"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="beQ-oq-Uou"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.50196078430000002" green="0.83921568629999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="QSZ-sD-VLG" secondAttribute="trailing" id="5Nv-ko-HGY"/>
+                            <constraint firstItem="QSZ-sD-VLG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ima-Lh-k58"/>
+                            <constraint firstItem="QSZ-sD-VLG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="xYN-qE-d1d"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="QSZ-sD-VLG" id="HCb-tx-XqZ"/>
+                        <outletCollection property="moveViewArray" destination="zLE-lX-OV5" collectionClass="NSMutableArray" id="3Sj-4z-dm6"/>
+                        <outletCollection property="moveViewArray" destination="IN0-Xj-9ku" collectionClass="NSMutableArray" id="KeR-8A-JHh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="lattice.png" width="888" height="888"/>
+        <image name="point.png" width="999" height="1782"/>
+    </resources>
+</document>
