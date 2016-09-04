@@ -27,7 +27,7 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
         return self.scrollView.subviews[0]
     }()
     
-    var moveViewArray = [LocationIndicatorView]()
+    var indicatorTableDict = [String : LocationIndicatorView]()
     
     @IBOutlet var imageView : UIImageView!
     
@@ -74,13 +74,66 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     }
     
     //MARK: - LocationIndicatorViewDelegate
-    func didTouchInside(view : LocationIndicatorView) {
+    func beganPan(_ view : LocationIndicatorView) {
         
         //換算成縮小時的座標
         var point = view.locationPoint()
         point = CGPoint(x: point.x * scaleNormal / scaleBig,
                         y: point.y * scaleNormal / scaleBig)
         self.detectToZoomIn(point: point)
+    }
+    
+    func requestChange(_ view : LocationIndicatorView, translate : CGPoint) -> CGPoint {
+        
+        guard let leader = self.indicatorTableDict[view.leaderIndicatorKey] else {
+            return translate
+        }
+        
+        let oldPoint = view.convert(view.locationPoint(), to: self.containerView)
+        let newPoint = CGPoint.init(x: oldPoint.x + translate.x,
+                                    y: oldPoint.y + translate.y)
+        let leaderPoint = leader.convert(leader.locationPoint(), to: self.containerView)
+        
+        var xDist = newPoint.x - leaderPoint.x
+        var yDist = newPoint.y - leaderPoint.y
+        let newDistance = sqrt(xDist * xDist + yDist * yDist)
+        
+        xDist = xDist / newDistance * view.leaderDistance
+        yDist = yDist / newDistance * view.leaderDistance
+        
+        return CGPoint(x: leaderPoint.x + xDist - oldPoint.x,
+                       y: leaderPoint.y + yDist - oldPoint.y)
+    }
+    
+    func locationUpdate(_ view : LocationIndicatorView, translate : CGPoint) {
+        
+        //這邊目前先設計一層 往後可以做多層
+        for (key, _) in view.followerIndicatorTableDict {
+            if let follower = self.indicatorTableDict[key] {
+                follower.frame =
+                    follower.frame.offsetBy(dx: translate.x, dy: translate.y)
+            }
+        }
+    }
+    
+    //MARK: - Connect
+    func connect(leaderKey : String,
+                 follower : LocationIndicatorView,
+                 distance : CGFloat) {
+        
+        if let leader = self.indicatorTableDict[leaderKey] {
+            leader.followerIndicatorTableDict[follower.name] = distance
+            follower.leaderIndicatorKey = leaderKey
+            follower.leaderDistance = self.convertRealLength2Board(distance)
+            
+            //調整連結距離
+            let offset = self.requestChange(follower, translate: CGPoint.zero)
+            follower.frame =
+                follower.frame.offsetBy(dx: offset.x, dy: offset.y)
+        }
+        else {
+            print("leader \(leaderKey) not found")
+        }
     }
     
     //MARK: - Action
@@ -131,33 +184,43 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     func addLocationIndicator(_ locationIndicator : LocationIndicatorView) {
         locationIndicator.delegate = self
         self.containerView.addSubview(locationIndicator)
-        self.moveViewArray.append(locationIndicator)
+        
+        if locationIndicator.name.isEmpty {
+            fatalError("locationIndicator name isEmpty")
+        }
+        self.indicatorTableDict[locationIndicator.name] = locationIndicator
     }
     
     func printPoints() {
-        for view in self.moveViewArray {
+        for (_, view) in self.indicatorTableDict {
             var point = view.convert(view.locationPoint(), to: self.containerView)
             point = self.convertBoard2RealPoint(point)
             print("\(view.name) : \(point.x) , \(point.y)")
         }
     }
     
-    //MARK: - convert
-    func convertRealPoint2Board(_ point : CGPoint) -> CGPoint {
+    //MARK: - Convert
+    func convertRealLength2Board(_ value : CGFloat) -> CGFloat {
         let boardSize = self.containerView.bounds.size
         let imageSize = self.imageView.image!.size
-        
-        let x = point.x * boardSize.width / imageSize.width
-        let y = point.y * boardSize.height / imageSize.height
+        return value * boardSize.width / imageSize.width
+    }
+    
+    func convertRealPoint2Board(_ point : CGPoint) -> CGPoint {
+        let x = self.convertRealLength2Board(point.x)
+        let y = self.convertRealLength2Board(point.y)
         return CGPoint(x: x, y: y)
     }
     
-    func convertBoard2RealPoint(_ point : CGPoint) -> CGPoint {
+    func convertBoard2RealLength(_ value : CGFloat) -> CGFloat {
         let boardSize = self.containerView.bounds.size
         let imageSize = self.imageView.image!.size
-        
-        let x = point.x / boardSize.width * imageSize.width
-        let y = point.y / boardSize.height * imageSize.height
+        return value / boardSize.width * imageSize.width
+    }
+    
+    func convertBoard2RealPoint(_ point : CGPoint) -> CGPoint {
+        let x = self.convertBoard2RealLength(point.x)
+        let y = self.convertBoard2RealLength(point.y)
         return CGPoint(x: x, y: y)
     }
 }

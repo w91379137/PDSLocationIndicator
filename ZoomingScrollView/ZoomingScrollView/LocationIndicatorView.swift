@@ -9,7 +9,9 @@
 import UIKit
 
 @objc protocol LocationIndicatorViewDelegate : NSObjectProtocol {
-    func didTouchInside(view : LocationIndicatorView)
+    func beganPan(_ view : LocationIndicatorView)
+    func requestChange(_ view : LocationIndicatorView, translate : CGPoint) -> CGPoint
+    func locationUpdate(_ view : LocationIndicatorView, translate : CGPoint)
 }
 
 let focusAlpha = CGFloat(1.0)
@@ -60,19 +62,24 @@ class LocationIndicatorView: UIView {
         switch sender.state {
         case .began:
             self.alpha = focusAlpha
-            self.delegate?.didTouchInside(view: self)
+            self.delegate?.beganPan(self)
         case .ended, .cancelled:
             self.alpha = normalAlpha
         default : break
         }
         
-        let offset = sender.translation(in: sender.view)
+        var offset = sender.translation(in: sender.view)
         sender.setTranslation(CGPoint.zero, in: sender.view)
+        
+        if let delegate = self.delegate {
+            offset = delegate.requestChange(self, translate: offset)
+        }
         
         self.transform = self.transform.translatedBy(x: offset.x, y: offset.y)
         
-        //是不是能通知 Board 一起移動視角？
-        //似乎會跟手勢位置不同
+//        self.updateSerialNumberRandomKey =
+//            "\(Int(Date().timeIntervalSince1970 * 1000))\(arc4random_uniform(1000))"
+        self.delegate?.locationUpdate(self, translate: offset)
     }
     
     //回傳 圖片指針所指的點 在自己的view 裡面
@@ -86,4 +93,11 @@ class LocationIndicatorView: UIView {
         return CGPoint(x: bounds.midX + CGFloat(cos(angle) * length),
                        y: bounds.midY + CGFloat(sin(angle) * length))
     }
+    
+    //Leader / Follower
+    var leaderIndicatorKey = String()
+    var leaderDistance : CGFloat = 0
+    
+    var followerIndicatorTableDict = [String : CGFloat]()
+    //var updateSerialNumberRandomKey = String()
 }

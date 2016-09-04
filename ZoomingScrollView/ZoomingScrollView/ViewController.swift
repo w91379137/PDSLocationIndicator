@@ -21,6 +21,9 @@ class ViewController: UIViewController {
     let boardViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LocationIndicatorBoardViewController")
         as! LocationIndicatorBoardViewController
     
+    //放大後的 控制元件大小
+    let controlSize = CGSize(width: 80, height: 80)
+    
     //MARK: - Life Cycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -28,8 +31,13 @@ class ViewController: UIViewController {
         //圖片上每個正方形邊長 100
         let lenght = CGFloat(100)
         
-        for index_x in 0..<4 {
-            for index_y in 0..<4 {
+        for index_x in 0..<2 {
+            for index_y in 0..<2 {
+                
+                let realPoint =
+                    CGPoint.init(x: lenght + CGFloat(index_x * 2) * lenght,
+                                 y: lenght + CGFloat(index_y * 2) * lenght)
+                
                 let locationIndicator = LocationIndicatorView()
                 locationIndicator.name = "Position_\(index_x)_\(index_y)"
                 locationIndicator.pointerAngle =
@@ -37,33 +45,46 @@ class ViewController: UIViewController {
                 
                 //locationIndicator.backgroundColor = UIColor.brown
                 
-                let realPoint =
-                    CGPoint.init(x: lenght + CGFloat(index_x * 2) * lenght,
-                                 y: lenght + CGFloat(index_y * 2) * lenght)
+                
                 
                 let boardPoint =
                     self.boardViewController.convertRealPoint2Board(realPoint)
                 
-                //放大後的 控制元件大小
-                let size =
-                    CGSize(width: 80, height: 80)
-                
                 //指針的偏差
                 let offset =
                     locationIndicator.locationPoint(bounds: CGRect(origin: CGPoint.zero,
-                                                                   size: size))
+                                                                   size: controlSize))
                 
                 let origin =
                     CGPoint(x: boardPoint.x - offset.x,
                             y: boardPoint.y - offset.y)
                 locationIndicator.frame = CGRect(origin: origin,
-                                        size: size)
+                                        size: controlSize)
                 self.boardViewController.addLocationIndicator(locationIndicator)
             }
         }
+        
+        let locationIndicator = LocationIndicatorView()
+        locationIndicator.name = "follow_Position_0_0"
+        let realPoint = CGPoint.init(x: 150, y: 150)
+        let boardPoint = self.boardViewController.convertRealPoint2Board(realPoint)
+        let offset =
+            locationIndicator.locationPoint(bounds: CGRect(origin: CGPoint.zero,
+                                                           size: controlSize))
+        let origin =
+            CGPoint(x: boardPoint.x - offset.x,
+                    y: boardPoint.y - offset.y)
+        locationIndicator.frame = CGRect(origin: origin,
+                                         size: controlSize)
+        self.boardViewController.addLocationIndicator(locationIndicator)
+        
+        //Position_0_0 connect
+        self.boardViewController.connect(leaderKey: "Position_0_0",
+                                         follower: locationIndicator,
+                                         distance: 100)
     }
     
-    //MARK: - 
+    //MARK: -
     @IBAction func printPoints() {
         self.boardViewController.printPoints()
     }
