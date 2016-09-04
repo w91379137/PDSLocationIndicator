@@ -27,7 +27,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4KN-lU-LUk">
-                                <state key="normal" title="Print"/>
+                                <state key="normal" title="列印出指針實際座標"/>
                                 <connections>
                                     <action selector="printPoints" destination="BYZ-38-t0r" eventType="touchUpInside" id="uOM-Wa-Cz1"/>
                                 </connections>
@@ -79,11 +79,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="P78-AW-TJg" firstAttribute="height" secondItem="YAp-1U-1N3" secondAttribute="height" multiplier="5" constant="1" id="44e-BG-adi"/>
+                                    <constraint firstItem="P78-AW-TJg" firstAttribute="height" secondItem="YAp-1U-1N3" secondAttribute="height" multiplier="4" constant="1" id="44e-BG-adi"/>
                                     <constraint firstItem="P78-AW-TJg" firstAttribute="top" secondItem="YAp-1U-1N3" secondAttribute="top" id="B3d-ru-arg"/>
                                     <constraint firstItem="P78-AW-TJg" firstAttribute="leading" secondItem="YAp-1U-1N3" secondAttribute="leading" id="BRF-y9-BHM"/>
                                     <constraint firstAttribute="bottom" secondItem="P78-AW-TJg" secondAttribute="bottom" id="dOl-sD-RHh"/>
-                                    <constraint firstItem="P78-AW-TJg" firstAttribute="width" secondItem="YAp-1U-1N3" secondAttribute="width" multiplier="5" constant="1" id="wOr-MT-0ex"/>
+                                    <constraint firstItem="P78-AW-TJg" firstAttribute="width" secondItem="YAp-1U-1N3" secondAttribute="width" multiplier="4" constant="1" id="wOr-MT-0ex"/>
                                     <constraint firstAttribute="trailing" secondItem="P78-AW-TJg" secondAttribute="trailing" id="z0x-K8-bEp"/>
                                 </constraints>
                                 <connections>
@@ -113,6 +113,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="lattice.png" width="888" height="888"/>
+        <image name="lattice.png" width="800" height="800"/>
     </resources>
 </document>

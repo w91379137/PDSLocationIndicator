@@ -65,8 +65,10 @@ class LocationIndicatorView: UIView {
         //似乎會跟手勢位置不同
     }
     
-    func locationPoint() -> CGPoint {
-        return CGPoint(x: self.frame.midX,
-                       y: self.frame.maxY)
+    //回傳 圖片指針所指的點 在自己的view 裡面
+    func locationPoint(bounds : CGRect? = nil) -> CGPoint {
+        let bounds = bounds ?? self.bounds
+        return CGPoint(x: bounds.midX,
+                       y: bounds.maxY)
     }
 }

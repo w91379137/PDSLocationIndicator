@@ -8,8 +8,9 @@
 
 import UIKit
 
-let scaleNormal = CGFloat(0.2)
+let scaleNormal = CGFloat(0.25)
 let scaleBig = CGFloat(1)
+//IB上面有設定
 //在 Normal 1 Big 5 的情況 LocationView 會拖曳困難
 
 class LocationIndicatorBoardViewController: UIViewController,
@@ -135,7 +136,28 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     
     func printPoints() {
         for view in self.moveViewArray {
-            print("\(view.name) : \(view.locationPoint())")
+            var point = view.convert(view.locationPoint(), to: self.containerView)
+            point = self.convertBoard2RealPoint(point)
+            print("\(view.name) : \(point.x) , \(point.y)")
         }
+    }
+    
+    //MARK: - convert
+    func convertRealPoint2Board(_ point : CGPoint) -> CGPoint {
+        let boardSize = self.containerView.bounds.size
+        let imageSize = self.imageView.image!.size
+        
+        let x = point.x * boardSize.width / imageSize.width
+        let y = point.y * boardSize.height / imageSize.height
+        return CGPoint(x: x, y: y)
+    }
+    
+    func convertBoard2RealPoint(_ point : CGPoint) -> CGPoint {
+        let boardSize = self.containerView.bounds.size
+        let imageSize = self.imageView.image!.size
+        
+        let x = point.x / boardSize.width * imageSize.width
+        let y = point.y / boardSize.height * imageSize.height
+        return CGPoint(x: x, y: y)
     }
 }

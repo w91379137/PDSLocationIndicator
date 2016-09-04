@@ -25,32 +25,42 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //圖片每格 111
-        //圖片總寬 888
-        //放大倍率 5
-        let lenght = self.baseView.bounds.width / 8 * (scaleBig / scaleNormal)
+        //圖片上每個正方形邊長 100
+        let lenght = CGFloat(100)
         
         for index_x in 0..<4 {
             for index_y in 0..<4 {
-                let location = LocationIndicatorView()
-                location.name = "Position_\(index_x)_\(index_y)"
+                let locationIndicator = LocationIndicatorView()
+                locationIndicator.name = "Position_\(index_x)_\(index_y)"
                 
-                let size = CGSize(width: 120, height: 214)
+                let realPoint =
+                    CGPoint.init(x: lenght + CGFloat(index_x * 2) * lenght,
+                                 y: lenght + CGFloat(index_y * 2) * lenght)
+                
+                let boardPoint =
+                    self.boardViewController.convertRealPoint2Board(realPoint)
+                
+                //放大後的 控制元件大小
+                let size =
+                    CGSize(width: 60, height: 107)
+                
+                //指針的偏差
+                let offset =
+                    locationIndicator.locationPoint(bounds: CGRect(origin: CGPoint.zero,
+                                                                   size: size))
+                
                 let origin =
-                    CGPoint(x: lenght - size.width / 2 +
-                            CGFloat(index_x * 2) * lenght,
-                            y: lenght - size.height +
-                            CGFloat(index_y * 2) * lenght)
-                location.frame = CGRect.init(origin: origin, size: size)
-                self.boardViewController.addLocationIndicator(location)
+                    CGPoint(x: boardPoint.x - offset.x,
+                            y: boardPoint.y - offset.y)
+                locationIndicator.frame = CGRect(origin: origin,
+                                        size: size)
+                self.boardViewController.addLocationIndicator(locationIndicator)
             }
         }
     }
     
     //MARK: - 
     @IBAction func printPoints() {
-        
-        //期望輸出每個標點在 圖片上的座標 而非 view 上的座標
         self.boardViewController.printPoints()
     }
 }
