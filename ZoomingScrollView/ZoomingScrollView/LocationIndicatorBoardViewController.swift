@@ -22,13 +22,11 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
         }
     }
     
-    @IBOutlet var moveViewArray : [LocationIndicatorView]! {
-        didSet {
-            for view in self.moveViewArray {
-                view.delegate = self
-            }
-        }
-    }
+    lazy var containerView : UIView = {
+        return self.scrollView.subviews[0]
+    }()
+    
+    var moveViewArray = [LocationIndicatorView]()
     
     @IBOutlet var imageView : UIImageView!
     
@@ -63,7 +61,7 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     
     //MARK: - UIScrollViewDelegate
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.scrollView.subviews[0]
+        return self.containerView
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -74,7 +72,7 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
         }
     }
     
-    //MARK: - LocationViewDelegate
+    //MARK: - LocationIndicatorViewDelegate
     func didTouchInside(view : LocationIndicatorView) {
         
         //換算成縮小時的座標
@@ -128,9 +126,16 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
         }
     }
     
+    //MARK: -
+    func addLocationIndicator(_ locationIndicator : LocationIndicatorView) {
+        locationIndicator.delegate = self
+        self.containerView.addSubview(locationIndicator)
+        self.moveViewArray.append(locationIndicator)
+    }
+    
     func printPoints() {
         for view in self.moveViewArray {
-            print(view.locationPoint())
+            print("\(view.name) : \(view.locationPoint())")
         }
     }
 }

@@ -18,18 +18,30 @@ let normalAlpha = CGFloat(0.3)
 class LocationIndicatorView: UIView {
     
     var delegate : LocationIndicatorViewDelegate?
-    var pan : UIPanGestureRecognizer?
+    
+    lazy var pan : UIPanGestureRecognizer = {
+        let pan = UIPanGestureRecognizer(target: self,
+                                         action: #selector(self.panAciton))
+        self.addGestureRecognizer(pan)
+        return pan
+    }()
+    
+    lazy var imageView : UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "point.png"))
+        self.addSubview(imageView)
+        imageView.frame = self.bounds
+        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        return imageView
+    }()
+    
+    var name = String()
     
     //MARK: - Life Cycle
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         self.alpha = normalAlpha
-        if self.pan == nil {
-            let pan = UIPanGestureRecognizer(target: self,
-                                             action: #selector(self.panAciton))
-            self.addGestureRecognizer(pan)
-            self.pan = pan
-        }
+        let _ = self.pan
+        let _ = self.imageView
     }
     
     //MARK: - Action
@@ -49,7 +61,8 @@ class LocationIndicatorView: UIView {
         
         self.transform = self.transform.translatedBy(x: offset.x, y: offset.y)
         
-        //TODO: 是不是能通知 Board 一起移動視角？
+        //是不是能通知 Board 一起移動視角？
+        //似乎會跟手勢位置不同
     }
     
     func locationPoint() -> CGPoint {
