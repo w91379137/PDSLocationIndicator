@@ -8,16 +8,16 @@
 
 import UIKit
 
-@objc protocol LocationViewDelegate : NSObjectProtocol {
-    func didTouchInside(view : LocationView)
+@objc protocol LocationIndicatorViewDelegate : NSObjectProtocol {
+    func didTouchInside(view : LocationIndicatorView)
 }
 
 let focusAlpha = CGFloat(1.0)
 let normalAlpha = CGFloat(0.3)
 
-class LocationView: UIControl {
+class LocationIndicatorView: UIView {
     
-    var delegate : LocationViewDelegate?
+    var delegate : LocationIndicatorViewDelegate?
     var pan : UIPanGestureRecognizer?
     
     //MARK: - Life Cycle
@@ -48,6 +48,8 @@ class LocationView: UIControl {
         sender.setTranslation(CGPoint.zero, in: sender.view)
         
         self.transform = self.transform.translatedBy(x: offset.x, y: offset.y)
+        
+        //TODO: 是不是能通知 Board 一起移動視角？
     }
     
     func locationPoint() -> CGPoint {

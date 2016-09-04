@@ -14,7 +14,8 @@
 		F87698931D796B4300F6990A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87698911D796B4300F6990A /* LaunchScreen.storyboard */; };
 		F876989F1D7972E800F6990A /* point.png in Resources */ = {isa = PBXBuildFile; fileRef = F876989E1D7972E800F6990A /* point.png */; };
 		F8F247391D7B2E3100DB8B5B /* lattice.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F247381D7B2E3100DB8B5B /* lattice.png */; };
-		F8F2473B1D7B39BF00DB8B5B /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F2473A1D7B39BF00DB8B5B /* LocationView.swift */; };
+		F8F2473B1D7B39BF00DB8B5B /* LocationIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F2473A1D7B39BF00DB8B5B /* LocationIndicatorView.swift */; };
+		F8F2473D1D7B533D00DB8B5B /* LocationIndicatorBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F2473C1D7B533D00DB8B5B /* LocationIndicatorBoardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +28,8 @@
 		F87698941D796B4300F6990A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F876989E1D7972E800F6990A /* point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = point.png; sourceTree = "<group>"; };
 		F8F247381D7B2E3100DB8B5B /* lattice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lattice.png; sourceTree = "<group>"; };
-		F8F2473A1D7B39BF00DB8B5B /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		F8F2473A1D7B39BF00DB8B5B /* LocationIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationIndicatorView.swift; sourceTree = "<group>"; };
+		F8F2473C1D7B533D00DB8B5B /* LocationIndicatorBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationIndicatorBoardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,17 +62,26 @@
 		F87698871D796B4300F6990A /* ZoomingScrollView */ = {
 			isa = PBXGroup;
 			children = (
-				F876989E1D7972E800F6990A /* point.png */,
-				F8F247381D7B2E3100DB8B5B /* lattice.png */,
 				F876988F1D796B4300F6990A /* Assets.xcassets */,
+				F8E325D01D7BD7A700EAA364 /* Resource */,
 				F87698911D796B4300F6990A /* LaunchScreen.storyboard */,
 				F876988C1D796B4300F6990A /* Main.storyboard */,
 				F87698881D796B4300F6990A /* AppDelegate.swift */,
 				F876988A1D796B4300F6990A /* ViewController.swift */,
-				F8F2473A1D7B39BF00DB8B5B /* LocationView.swift */,
+				F8F2473C1D7B533D00DB8B5B /* LocationIndicatorBoardViewController.swift */,
+				F8F2473A1D7B39BF00DB8B5B /* LocationIndicatorView.swift */,
 				F87698941D796B4300F6990A /* Info.plist */,
 			);
 			path = ZoomingScrollView;
+			sourceTree = "<group>";
+		};
+		F8E325D01D7BD7A700EAA364 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				F876989E1D7972E800F6990A /* point.png */,
+				F8F247381D7B2E3100DB8B5B /* lattice.png */,
+			);
+			name = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,7 +160,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F876988B1D796B4300F6990A /* ViewController.swift in Sources */,
-				F8F2473B1D7B39BF00DB8B5B /* LocationView.swift in Sources */,
+				F8F2473B1D7B39BF00DB8B5B /* LocationIndicatorView.swift in Sources */,
+				F8F2473D1D7B533D00DB8B5B /* LocationIndicatorBoardViewController.swift in Sources */,
 				F87698891D796B4300F6990A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,6 +285,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = SJZ9Z68RJP;
 				INFOPLIST_FILE = ZoomingScrollView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.spe3d.ZoomingScrollView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -286,6 +299,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = SJZ9Z68RJP;
 				INFOPLIST_FILE = ZoomingScrollView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.spe3d.ZoomingScrollView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
