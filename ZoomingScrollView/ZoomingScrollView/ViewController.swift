@@ -32,6 +32,10 @@ class ViewController: UIViewController {
             for index_y in 0..<4 {
                 let locationIndicator = LocationIndicatorView()
                 locationIndicator.name = "Position_\(index_x)_\(index_y)"
+                locationIndicator.pointerAngle =
+                    Double((index_x + index_y) * 90)
+                
+                //locationIndicator.backgroundColor = UIColor.brown
                 
                 let realPoint =
                     CGPoint.init(x: lenght + CGFloat(index_x * 2) * lenght,
@@ -42,7 +46,7 @@ class ViewController: UIViewController {
                 
                 //放大後的 控制元件大小
                 let size =
-                    CGSize(width: 60, height: 107)
+                    CGSize(width: 80, height: 80)
                 
                 //指針的偏差
                 let offset =

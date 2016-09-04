@@ -28,6 +28,7 @@ class LocationIndicatorView: UIView {
     
     lazy var imageView : UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "point.png"))
+        imageView.contentMode = .scaleAspectFit
         self.addSubview(imageView)
         imageView.frame = self.bounds
         imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -35,6 +36,15 @@ class LocationIndicatorView: UIView {
     }()
     
     var name = String()
+    
+    //目前只能是90 的倍數
+    var pointerAngle = 0.0 {
+        didSet {
+            let angle = self.pointerAngle / 180.0 * M_PI
+            self.imageView.transform =
+                CGAffineTransform.init(rotationAngle: CGFloat(angle))
+        }
+    }
     
     //MARK: - Life Cycle
     override func didMoveToSuperview() {
@@ -68,7 +78,12 @@ class LocationIndicatorView: UIView {
     //回傳 圖片指針所指的點 在自己的view 裡面
     func locationPoint(bounds : CGRect? = nil) -> CGPoint {
         let bounds = bounds ?? self.bounds
-        return CGPoint(x: bounds.midX,
-                       y: bounds.maxY)
+        
+        //假設是正方形
+        let length = Double(bounds.width / 2)
+        let angle = self.pointerAngle / 180.0 * M_PI
+        
+        return CGPoint(x: bounds.midX + CGFloat(cos(angle) * length),
+                       y: bounds.midY + CGFloat(sin(angle) * length))
     }
 }
