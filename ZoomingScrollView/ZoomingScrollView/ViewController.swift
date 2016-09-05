@@ -39,10 +39,8 @@ class ViewController: UIViewController {
             
             for index_y in 0..<4 {
                 
-                let realPoint =
-                    CGPoint.init(x: lenght + CGFloat(index_x * 2) * lenght,
-                                 y: lenght + CGFloat(index_y * 2) * lenght)
-                
+                let realPoint = CGPoint(x: CGFloat(index_x * 2 + 1) * lenght,
+                                        y: CGFloat(index_y * 2 + 1) * lenght)
                 let locationIndicator = LocationIndicatorView()
                 locationIndicator.name = "Position_\(index_x)_\(index_y)"
                 locationIndicator.pointerAngle = Double((index_x + index_y) * 90)

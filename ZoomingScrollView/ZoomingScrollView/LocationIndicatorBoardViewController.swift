@@ -77,7 +77,7 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     func beganPan(_ view : LocationIndicatorView) {
         
         //換算成縮小時的座標
-        var point = view.locationPoint()
+        var point = view.convert(view.locationPoint(), to: self.containerView)
         point = CGPoint(x: point.x * scaleNormal / scaleBig,
                         y: point.y * scaleNormal / scaleBig)
         self.detectToZoomIn(point: point)
