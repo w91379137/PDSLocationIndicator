@@ -114,6 +114,8 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
                     follower.frame.offsetBy(dx: translate.x, dy: translate.y)
             }
         }
+        
+        self.updateCurve()
     }
     
     //MARK: - Connect
@@ -223,4 +225,42 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
         let y = self.convertBoard2RealLength(point.y)
         return CGPoint(x: x, y: y)
     }
+    
+    //MARK: - Draw
+    @IBOutlet var drawView : DrawView!
+    var pointKeyListArray = [[String]]() {
+        didSet {
+            self.updateCurve()
+        }
+    }
+    
+    func updateCurve() {
+        
+        var pointListArray = [[CGPoint]]()
+        
+        for pointKeyList in self.pointKeyListArray {
+            
+            var pointList = [CGPoint]()
+            for pointKey in pointKeyList {
+                
+                if let view = self.indicatorTableDict[pointKey] {
+                    let point = view.convert(view.locationPoint(), to: self.containerView)
+                    pointList.append(point)
+                }
+                else {
+                    pointList = [CGPoint]()
+                    print("PointKey: \(pointKey) not found")
+                    break
+                }
+            }
+            
+            if pointList.count > 0 {
+                pointListArray.append(pointList)
+            }
+        }
+        
+        drawView.pointListArray = pointListArray
+        self.drawView.setNeedsDisplay()
+    }
 }
+

@@ -31,8 +31,13 @@ class ViewController: UIViewController {
         //圖片上每個正方形邊長 100
         let lenght = CGFloat(100)
         
-        for index_x in 0..<2 {
-            for index_y in 0..<2 {
+        var pointKeyListArray = [[String]]()
+        
+        for index_x in 0..<4 {
+            
+            var pointKeyList = [String]()
+            
+            for index_y in 0..<4 {
                 
                 let realPoint =
                     CGPoint.init(x: lenght + CGFloat(index_x * 2) * lenght,
@@ -40,6 +45,8 @@ class ViewController: UIViewController {
                 
                 let locationIndicator = LocationIndicatorView()
                 locationIndicator.name = "Position_\(index_x)_\(index_y)"
+                pointKeyList.append(locationIndicator.name)
+                
                 locationIndicator.pointerAngle =
                     Double((index_x + index_y) * 90)
                 
@@ -62,6 +69,8 @@ class ViewController: UIViewController {
                                         size: controlSize)
                 self.boardViewController.addLocationIndicator(locationIndicator)
             }
+            
+            pointKeyListArray.append(pointKeyList)
         }
         
         let locationIndicator = LocationIndicatorView()
@@ -82,6 +91,10 @@ class ViewController: UIViewController {
         self.boardViewController.connect(leaderKey: "Position_0_0",
                                          follower: locationIndicator,
                                          distance: 100)
+        
+        pointKeyListArray.append(["follow_Position_0_0", "Position_0_0"])
+        pointKeyListArray.append(["Position_0_0", "Position_1_1", "Position_2_2", "Position_3_3"])
+        self.boardViewController.pointKeyListArray = pointKeyListArray
     }
     
     //MARK: -
