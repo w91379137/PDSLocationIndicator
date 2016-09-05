@@ -21,16 +21,50 @@ class ViewController: UIViewController {
     let boardViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LocationIndicatorBoardViewController")
         as! LocationIndicatorBoardViewController
     
-    //放大後的 控制元件大小
-    let controlSize = CGSize(width: 80, height: 80)
+    let lenght = CGFloat(100) //圖片上每個正方形邊長 100
+    let controlSize = CGSize(width: 80, height: 80) //放大後的 控制元件大小
     
     //MARK: - Life Cycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //圖片上每個正方形邊長 100
-        let lenght = CGFloat(100)
+        var points = [CGPoint]()
+        points.append(CGPoint(x: 200, y: 200))
+        points.append(CGPoint(x: 200, y: 400))
+        points.append(CGPoint(x: 200, y: 600))
+        points.append(CGPoint(x: 400, y: 600))
+        points.append(CGPoint(x: 600, y: 600))
+        points.append(CGPoint(x: 600, y: 400))
+        points.append(CGPoint(x: 600, y: 200))
         
+        var pointKeyList = [String]()
+        for (index, point) in points.enumerated() {
+            let locationIndicator = LocationIndicatorView()
+            locationIndicator.name = "Position_\(point)"
+            
+            switch index {
+            case 0...1: locationIndicator.pointerAngle = 0
+                break
+            case 2...4: locationIndicator.pointerAngle = -90
+                break
+            case 5...6: locationIndicator.pointerAngle = -180
+                break
+            default :
+                break
+            }
+            
+            self.boardViewController.addLocationIndicator(locationIndicator,
+                                                          realPoint: point,
+                                                          size: controlSize)
+            
+            pointKeyList.append(locationIndicator.name)
+        }
+        
+        
+        self.boardViewController.pointKeyListArray = [pointKeyList]
+    }
+    
+    func test16Mode() {
         var pointKeyListArray = [[String]]()
         
         for index_x in 0..<4 {

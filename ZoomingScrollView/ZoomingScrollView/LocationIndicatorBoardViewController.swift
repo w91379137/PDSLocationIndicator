@@ -18,6 +18,9 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     
     @IBOutlet var scrollView : UIScrollView! {
         didSet {
+            self.scrollView.minimumZoomScale = scaleNormal
+            self.scrollView.maximumZoomScale = scaleBig
+            
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapAction))
             self.scrollView.addGestureRecognizer(tap)
         }
@@ -33,22 +36,22 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     
     enum ZoomStatus {
         case normal
+        case userPinch
         case big
     }
     
     var zoomStatus : ZoomStatus = .normal {
         didSet {
             
-            var scale : CGFloat
+            var scale : CGFloat? = nil
             
             switch self.zoomStatus {
             case .normal: scale = scaleNormal
             case .big: scale = scaleBig
+            default: break
             }
             
-            if isViewLoaded {
-                self.scrollView.minimumZoomScale = scale
-                self.scrollView.maximumZoomScale = scale
+            if let scale = scale {
                 self.scrollView.setZoomScale(scale, animated: false)
             }
         }
@@ -67,9 +70,21 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         let pan = scrollView.panGestureRecognizer
-        if pan.numberOfTouches > 0 {
+        if pan.numberOfTouches == 1 {
             let point = pan.location(ofTouch: 0, in: scrollView)
             self.detectToZoomIn(point: point)
+        }
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        if scrollView.zoomScale == scaleNormal {
+            self.zoomStatus = .normal
+        }
+        else if scrollView.zoomScale == scaleBig {
+            self.zoomStatus = .big
+        }
+        else {
+            self.zoomStatus = .userPinch
         }
     }
     
@@ -140,14 +155,15 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     
     //MARK: - Action
     func tapAction(sender : UITapGestureRecognizer) {
-        if self.zoomStatus == .big {
+        
+        switch self.zoomStatus {
+        case .normal:
+            let point = sender.location(in: sender.view)
+            self.detectToZoomIn(point: point)
+        default:
             self.animateAction {
                 self.zoomStatus = .normal
             }
-        }
-        else {
-            let point = sender.location(in: sender.view)
-            self.detectToZoomIn(point: point)
         }
     }
     
