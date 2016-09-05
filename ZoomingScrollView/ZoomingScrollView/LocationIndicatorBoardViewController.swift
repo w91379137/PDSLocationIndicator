@@ -183,7 +183,23 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     }
     
     //MARK: -
-    func addLocationIndicator(_ locationIndicator : LocationIndicatorView) {
+    func addLocationIndicator(_ locationIndicator : LocationIndicatorView,
+                              realPoint : CGPoint,
+                              size : CGSize) {
+        let boardPoint =
+            self.convertRealPoint2Board(realPoint)
+        let offset =
+            locationIndicator.locationPoint(bounds: CGRect(origin: CGPoint.zero,
+                                                           size: size))
+        let origin =
+            CGPoint(x: boardPoint.x - offset.x,
+                    y: boardPoint.y - offset.y)
+        locationIndicator.frame = CGRect(origin: origin,
+                                         size: size)
+        self.addLocationIndicatorToContainerView(locationIndicator)
+    }
+    
+    func addLocationIndicatorToContainerView(_ locationIndicator : LocationIndicatorView) {
         locationIndicator.delegate = self
         self.containerView.addSubview(locationIndicator)
         

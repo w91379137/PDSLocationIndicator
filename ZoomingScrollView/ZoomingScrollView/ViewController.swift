@@ -45,53 +45,33 @@ class ViewController: UIViewController {
                 
                 let locationIndicator = LocationIndicatorView()
                 locationIndicator.name = "Position_\(index_x)_\(index_y)"
-                pointKeyList.append(locationIndicator.name)
-                
-                locationIndicator.pointerAngle =
-                    Double((index_x + index_y) * 90)
-                
+                locationIndicator.pointerAngle = Double((index_x + index_y) * 90)
                 //locationIndicator.backgroundColor = UIColor.brown
                 
+                self.boardViewController.addLocationIndicator(locationIndicator,
+                                                              realPoint: realPoint,
+                                                              size: controlSize)
                 
-                
-                let boardPoint =
-                    self.boardViewController.convertRealPoint2Board(realPoint)
-                
-                //指針的偏差
-                let offset =
-                    locationIndicator.locationPoint(bounds: CGRect(origin: CGPoint.zero,
-                                                                   size: controlSize))
-                
-                let origin =
-                    CGPoint(x: boardPoint.x - offset.x,
-                            y: boardPoint.y - offset.y)
-                locationIndicator.frame = CGRect(origin: origin,
-                                        size: controlSize)
-                self.boardViewController.addLocationIndicator(locationIndicator)
+                pointKeyList.append(locationIndicator.name)
             }
-            
             pointKeyListArray.append(pointKeyList)
         }
         
+        let realPoint = CGPoint.init(x: 150, y: 150)
+        
         let locationIndicator = LocationIndicatorView()
         locationIndicator.name = "follow_Position_0_0"
-        let realPoint = CGPoint.init(x: 150, y: 150)
-        let boardPoint = self.boardViewController.convertRealPoint2Board(realPoint)
-        let offset =
-            locationIndicator.locationPoint(bounds: CGRect(origin: CGPoint.zero,
-                                                           size: controlSize))
-        let origin =
-            CGPoint(x: boardPoint.x - offset.x,
-                    y: boardPoint.y - offset.y)
-        locationIndicator.frame = CGRect(origin: origin,
-                                         size: controlSize)
-        self.boardViewController.addLocationIndicator(locationIndicator)
+        
+        self.boardViewController.addLocationIndicator(locationIndicator,
+                                                      realPoint: realPoint,
+                                                      size: controlSize)
         
         //Position_0_0 connect
         self.boardViewController.connect(leaderKey: "Position_0_0",
                                          follower: locationIndicator,
                                          distance: 100)
         
+        //連線
         pointKeyListArray.append(["follow_Position_0_0", "Position_0_0"])
         pointKeyListArray.append(["Position_0_0", "Position_1_1", "Position_2_2", "Position_3_3"])
         self.boardViewController.pointKeyListArray = pointKeyListArray
