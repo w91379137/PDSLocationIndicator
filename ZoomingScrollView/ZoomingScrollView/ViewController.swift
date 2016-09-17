@@ -28,6 +28,10 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        self.test16Mode()
+    }
+    
+    func test3Mode() {
         var points = [CGPoint]()
         points.append(CGPoint(x: 200, y: 200))
         points.append(CGPoint(x: 200, y: 400))
@@ -77,7 +81,7 @@ class ViewController: UIViewController {
                                         y: CGFloat(index_y * 2 + 1) * lenght)
                 let locationIndicator = LocationIndicatorView()
                 locationIndicator.name = "Position_\(index_x)_\(index_y)"
-                locationIndicator.pointerAngle = Double((index_x + index_y) * 90)
+                locationIndicator.pointerAngle = Double((index_x + index_y * 4) * 30)
                 //locationIndicator.backgroundColor = UIColor.brown
                 
                 self.boardViewController.addLocationIndicator(locationIndicator,
@@ -89,7 +93,7 @@ class ViewController: UIViewController {
             pointKeyListArray.append(pointKeyList)
         }
         
-        let realPoint = CGPoint.init(x: 150, y: 150)
+        let realPoint = CGPoint(x: 150, y: 150)
         
         let locationIndicator = LocationIndicatorView()
         locationIndicator.name = "follow_Position_0_0"

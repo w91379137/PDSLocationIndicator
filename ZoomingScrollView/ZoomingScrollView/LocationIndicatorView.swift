@@ -29,8 +29,10 @@ class LocationIndicatorView: UIView {
     }()
     
     lazy var imageView : UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "point.png"))
-        imageView.contentMode = .scaleAspectFit
+        let imageView = UIImageView(frame : CGRect.zero)
+        
+        imageView.image = UIImage(named: "point80.png")
+        imageView.contentMode = .center
         self.addSubview(imageView)
         imageView.frame = self.bounds
         imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -39,7 +41,6 @@ class LocationIndicatorView: UIView {
     
     var name = String()
     
-    //目前只能是90 的倍數
     var pointerAngle = 0.0 {
         didSet {
             let angle = self.pointerAngle / 180.0 * M_PI

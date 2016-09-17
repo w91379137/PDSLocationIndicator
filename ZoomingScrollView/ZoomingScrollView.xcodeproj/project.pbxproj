@@ -14,6 +14,7 @@
 		F87698931D796B4300F6990A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87698911D796B4300F6990A /* LaunchScreen.storyboard */; };
 		F876989F1D7972E800F6990A /* point.png in Resources */ = {isa = PBXBuildFile; fileRef = F876989E1D7972E800F6990A /* point.png */; };
 		F88841DD1D7D26B900BCB423 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88841DC1D7D26B900BCB423 /* DrawView.swift */; };
+		F8C655641D8D967100F111EA /* point80.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C655631D8D967100F111EA /* point80.png */; };
 		F8F247391D7B2E3100DB8B5B /* lattice.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F247381D7B2E3100DB8B5B /* lattice.png */; };
 		F8F2473B1D7B39BF00DB8B5B /* LocationIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F2473A1D7B39BF00DB8B5B /* LocationIndicatorView.swift */; };
 		F8F2473D1D7B533D00DB8B5B /* LocationIndicatorBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F2473C1D7B533D00DB8B5B /* LocationIndicatorBoardViewController.swift */; };
@@ -29,6 +30,7 @@
 		F87698941D796B4300F6990A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F876989E1D7972E800F6990A /* point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = point.png; sourceTree = "<group>"; };
 		F88841DC1D7D26B900BCB423 /* DrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
+		F8C655631D8D967100F111EA /* point80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = point80.png; sourceTree = "<group>"; };
 		F8F247381D7B2E3100DB8B5B /* lattice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lattice.png; sourceTree = "<group>"; };
 		F8F2473A1D7B39BF00DB8B5B /* LocationIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationIndicatorView.swift; sourceTree = "<group>"; };
 		F8F2473C1D7B533D00DB8B5B /* LocationIndicatorBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationIndicatorBoardViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				F876989E1D7972E800F6990A /* point.png */,
+				F8C655631D8D967100F111EA /* point80.png */,
 				F8F247381D7B2E3100DB8B5B /* lattice.png */,
 			);
 			name = Resource;
@@ -149,6 +152,7 @@
 			files = (
 				F87698931D796B4300F6990A /* LaunchScreen.storyboard in Resources */,
 				F876989F1D7972E800F6990A /* point.png in Resources */,
+				F8C655641D8D967100F111EA /* point80.png in Resources */,
 				F87698901D796B4300F6990A /* Assets.xcassets in Resources */,
 				F8F247391D7B2E3100DB8B5B /* lattice.png in Resources */,
 				F876988E1D796B4300F6990A /* Main.storyboard in Resources */,
