@@ -69,9 +69,33 @@ class LocationIndicatorView: UIView {
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         self.alpha = normalAlpha
-        let _ = self.pan
-        let _ = self.imageView
+        _ = self.pan
+        _ = self.imageView
     }
+    
+    //MARK: - Point 關於指針所指位置
+    func set(size : CGSize, pointTo point : CGPoint) {
+        let offset =
+            self.locationPoint(bounds: CGRect(origin: CGPoint.zero,
+                                              size: size))
+        let origin =
+            CGPoint(x: point.x - offset.x,
+                    y: point.y - offset.y)
+        
+        self.frame = CGRect(origin: origin, size: size)
+    }
+    
+    //回傳 圖片指針所指的點 在自己的view 裡面
+    func locationPoint(bounds : CGRect? = nil) -> CGPoint {
+        let bounds = bounds ?? self.bounds
+        
+        let length = Double(bounds.width / 2)
+        let angle = self.pointerAngle / 180.0 * M_PI
+        
+        return CGPoint(x: bounds.midX + CGFloat(cos(angle) * length),
+                       y: bounds.midY + CGFloat(sin(angle) * length))
+    }
+    
     
     //MARK: - Action
     func panAciton(sender : UIPanGestureRecognizer) {
@@ -97,18 +121,6 @@ class LocationIndicatorView: UIView {
 //        self.updateSerialNumberRandomKey =
 //            "\(Int(Date().timeIntervalSince1970 * 1000))\(arc4random_uniform(1000))"
         self.delegate?.locationUpdate(self, translate: offset)
-    }
-    
-    //回傳 圖片指針所指的點 在自己的view 裡面
-    func locationPoint(bounds : CGRect? = nil) -> CGPoint {
-        let bounds = bounds ?? self.bounds
-        
-        //假設是正方形
-        let length = Double(bounds.width / 2)
-        let angle = self.pointerAngle / 180.0 * M_PI
-        
-        return CGPoint(x: bounds.midX + CGFloat(cos(angle) * length),
-                       y: bounds.midY + CGFloat(sin(angle) * length))
     }
     
     //Leader / Follower

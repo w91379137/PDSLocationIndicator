@@ -19,7 +19,7 @@ class LocationMapping: NSObject {
         super.init()
     }
     
-    //MARK: - Convert
+    //MARK: - Convert Real to Draw
     func distanceReal2Draw(_ value : CGFloat) -> CGFloat {
         return value * scale
     }
@@ -29,6 +29,13 @@ class LocationMapping: NSObject {
                        y: distanceReal2Draw(point.y))
     }
     
+    func pointsReal2Draw(_ points : [CGPoint]) -> [CGPoint] {
+        return points.map({ (point) -> CGPoint in
+            return self.pointReal2Draw(point)
+        })
+    }
+    
+    //MARK: - Convert Draw to Real
     func distanceDraw2Real(_ value : CGFloat) -> CGFloat {
         return value / scale
     }
@@ -36,5 +43,11 @@ class LocationMapping: NSObject {
     func pointDraw2Real(_ point : CGPoint) -> CGPoint {
         return CGPoint(x: distanceDraw2Real(point.x),
                        y: distanceDraw2Real(point.y))
+    }
+    
+    func pointsDraw2Real(_ points : [CGPoint]) -> [CGPoint] {
+        return points.map({ (point) -> CGPoint in
+            return self.pointDraw2Real(point)
+        })
     }
 }

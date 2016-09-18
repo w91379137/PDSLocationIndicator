@@ -41,17 +41,17 @@ class ViewController: UIViewController {
         return boardViewController
     }()
     
-    let lenght = CGFloat(100) //圖片上每個正方形邊長 100
-    let controlSize = CGSize(width: 80, height: 80) //放大後的 控制元件大小
-    
     //MARK: - Life Cycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        self.test16Mode()
+        self.demo16Points()
     }
     
-    func test3Mode() {
+    //MARK: - Demo
+    let lenght = CGFloat(100) //圖片上每個正方形邊長 100
+    let controlSize = CGSize(width: 80, height: 80) //放大後的 控制元件大小
+    
+    func demo3Side() {
         var points = [CGPoint]()
         points.append(CGPoint(x: 200, y: 200))
         points.append(CGPoint(x: 200, y: 400))
@@ -61,66 +61,62 @@ class ViewController: UIViewController {
         points.append(CGPoint(x: 600, y: 400))
         points.append(CGPoint(x: 600, y: 200))
         
+        points = self.locationMapping.pointsReal2Draw(points)
+        
         var pointKeyList = [String]()
         for (index, point) in points.enumerated() {
             let locationIndicator = LocationIndicatorView()
-            locationIndicator.name = "P_\(point)"
+            locationIndicator.name = "P_\(index)"
             
+            var angle = 0.0
             switch index {
-            case 0...1: locationIndicator.pointerAngle = 0
-                break
-            case 2...4: locationIndicator.pointerAngle = -90
-                break
-            case 5...6: locationIndicator.pointerAngle = -180
-                break
-            default :
-                break
-            }
+            case 2 : angle = -45
+            case 3 : angle = -90
+            case 4 : angle = -135
+            case 5...6: angle = -180
+            default : break }
             
-            self.boardViewController.addLocationIndicator(locationIndicator,
-                                                          realPoint: point,
-                                                          size: controlSize)
+            locationIndicator.pointerAngle = angle
+            locationIndicator.set(size: controlSize, pointTo: point)
             
+            self.boardViewController.addLocationIndicatorToContainerView(locationIndicator)
             pointKeyList.append(locationIndicator.name)
         }
-        
         
         self.boardViewController.pointKeyListArray = [pointKeyList]
     }
     
-    func test16Mode() {
-        var pointKeyListArray = [[String]]()
+    func demo16Points() {
         
+        var pointKeyListArray = [[String]]()
         for index_x in 0..<4 {
             
             var pointKeyList = [String]()
-            
             for index_y in 0..<4 {
                 
-                let realPoint = CGPoint(x: CGFloat(index_x * 2 + 1) * lenght,
-                                        y: CGFloat(index_y * 2 + 1) * lenght)
+                var point = CGPoint(x: CGFloat(index_x * 2 + 1) * lenght,
+                                    y: CGFloat(index_y * 2 + 1) * lenght)
+                point = self.locationMapping.pointReal2Draw(point)
+                
                 let locationIndicator = LocationIndicatorView()
                 locationIndicator.name = "P_\(index_x)_\(index_y)"
                 locationIndicator.pointerAngle = Double((index_x + index_y * 4) * 30)
-                //locationIndicator.backgroundColor = UIColor.brown
+                locationIndicator.set(size: controlSize, pointTo: point)
                 
-                self.boardViewController.addLocationIndicator(locationIndicator,
-                                                              realPoint: realPoint,
-                                                              size: controlSize)
-                
+                self.boardViewController.addLocationIndicatorToContainerView(locationIndicator)
                 pointKeyList.append(locationIndicator.name)
             }
             pointKeyListArray.append(pointKeyList)
         }
         
-        let realPoint = CGPoint(x: 150, y: 150)
+        var point = CGPoint(x: 150, y: 150)
+        point = self.locationMapping.pointReal2Draw(point)
         
         let locationIndicator = LocationIndicatorView()
         locationIndicator.name = "F_P_0_0"
+        locationIndicator.set(size: controlSize, pointTo: point)
         
-        self.boardViewController.addLocationIndicator(locationIndicator,
-                                                      realPoint: realPoint,
-                                                      size: controlSize)
+        self.boardViewController.addLocationIndicatorToContainerView(locationIndicator)
         
         //Position_0_0 connect
         self.boardViewController.connect(leaderKey: "P_0_0",
@@ -133,7 +129,7 @@ class ViewController: UIViewController {
         self.boardViewController.pointKeyListArray = pointKeyListArray
     }
     
-    //MARK: -
+    //MARK: - IBAction
     @IBAction func printPoints() {
         self.boardViewController.printPoints()
     }
