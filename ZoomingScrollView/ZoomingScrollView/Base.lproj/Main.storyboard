@@ -49,10 +49,10 @@
             </objects>
             <point key="canvasLocation" x="-713" y="-130"/>
         </scene>
-        <!--Location Indicator Board View Controller-->
+        <!--Location Board View Controller-->
         <scene sceneID="MM9-3D-tpa">
             <objects>
-                <viewController storyboardIdentifier="LocationIndicatorBoardViewController" id="ToF-GH-3w1" customClass="LocationIndicatorBoardViewController" customModule="ZoomingScrollView" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationBoardViewController" id="ToF-GH-3w1" customClass="LocationBoardViewController" customModule="ZoomingScrollView" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MuA-h6-P5i"/>
                         <viewControllerLayoutGuide type="bottom" id="f1V-uF-ATX"/>
@@ -66,20 +66,13 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P78-AW-TJg">
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Us-fr-XBN"/>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1j0-he-n7B" customClass="DrawView" customModule="ZoomingScrollView" customModuleProvider="target">
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="1j0-he-n7B" firstAttribute="leading" secondItem="P78-AW-TJg" secondAttribute="leading" id="2IG-bm-9Wd"/>
-                                            <constraint firstAttribute="trailing" secondItem="1j0-he-n7B" secondAttribute="trailing" id="CN2-yY-NDY"/>
                                             <constraint firstItem="4Us-fr-XBN" firstAttribute="leading" secondItem="P78-AW-TJg" secondAttribute="leading" id="Ev1-yN-Jjd"/>
                                             <constraint firstItem="4Us-fr-XBN" firstAttribute="top" secondItem="P78-AW-TJg" secondAttribute="top" id="Pwq-4t-7pn"/>
-                                            <constraint firstItem="1j0-he-n7B" firstAttribute="top" secondItem="P78-AW-TJg" secondAttribute="top" id="V9s-yy-vhx"/>
                                             <constraint firstAttribute="trailing" secondItem="4Us-fr-XBN" secondAttribute="trailing" id="Wqm-MK-GgD"/>
                                             <constraint firstAttribute="bottom" secondItem="4Us-fr-XBN" secondAttribute="bottom" id="lcB-Hp-iw9"/>
-                                            <constraint firstAttribute="bottom" secondItem="1j0-he-n7B" secondAttribute="bottom" id="xeq-K4-8k0"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -109,7 +102,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="300"/>
                     <connections>
-                        <outlet property="drawView" destination="1j0-he-n7B" id="hU4-Hn-Fp6"/>
                         <outlet property="imageView" destination="4Us-fr-XBN" id="gu2-9s-Oj5"/>
                         <outlet property="scrollView" destination="YAp-1U-1N3" id="ihb-kZ-61x"/>
                     </connections>

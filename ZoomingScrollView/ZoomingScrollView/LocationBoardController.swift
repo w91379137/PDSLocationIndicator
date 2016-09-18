@@ -13,11 +13,17 @@ let scaleBig = CGFloat(1)
 //IB上面有設定
 //在 Normal 1 Big 5 的情況 LocationView 會拖曳困難
 
-class LocationIndicatorBoardViewController: UIViewController,
+@objc protocol LocationBoardViewControllerDelegate : NSObjectProtocol {
+    func pointsUpdate(_ locationBoardViewController : LocationIndicatorViewDelegate)
+}
+
+class LocationBoardViewController: UIViewController,
 UIScrollViewDelegate, LocationIndicatorViewDelegate {
     
-    var locationMapping = LocationMapping(scale: 1)
+    var delegate : LocationBoardViewControllerDelegate? = nil
+    var indicatorTableDict = [String : LocationIndicatorView]()
     
+    //ScrollView
     @IBOutlet var scrollView : UIScrollView! {
         didSet {
             self.scrollView.minimumZoomScale = scaleNormal
@@ -32,8 +38,7 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
         return self.scrollView.subviews[0]
     }()
     
-    var indicatorTableDict = [String : LocationIndicatorView]()
-    
+    //Image
     var image : UIImage? = nil {
         didSet {
             if isViewLoaded {
@@ -47,6 +52,7 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
         }
     }
     
+    //Zoom
     enum ZoomStatus {
         case normal
         case mid
@@ -118,8 +124,8 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
         }
         
         let oldPoint = view.convert(view.locationPoint(), to: self.containerView)
-        let newPoint = CGPoint.init(x: oldPoint.x + translate.x,
-                                    y: oldPoint.y + translate.y)
+        let newPoint = CGPoint(x: oldPoint.x + translate.x,
+                               y: oldPoint.y + translate.y)
         let leaderPoint = leader.convert(leader.locationPoint(), to: self.containerView)
         
         var xDist = newPoint.x - leaderPoint.x
@@ -135,7 +141,7 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     
     func locationUpdate(_ view : LocationIndicatorView, translate : CGPoint) {
         
-        //這邊目前先設計一層 往後可以做多層
+        //TODO: 目前先設計一層 往後多層連動
         for (key, _) in view.followerIndicatorTableDict {
             if let follower = self.indicatorTableDict[key] {
                 follower.frame =
@@ -143,10 +149,21 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
             }
         }
         
-        self.updateCurve()
+        self.delegate?.pointsUpdate(self)
     }
     
-    //MARK: - Connect
+    //MARK: - Location Indicator
+    func addLocationIndicator(_ locationIndicator : LocationIndicatorView) {
+        
+        locationIndicator.delegate = self
+        self.containerView.addSubview(locationIndicator)
+        
+        if locationIndicator.name.isEmpty {
+            fatalError("locationIndicator name isEmpty")
+        }
+        self.indicatorTableDict[locationIndicator.name] = locationIndicator
+    }
+    
     func connect(leaderKey : String,
                  follower : LocationIndicatorView,
                  distance : CGFloat) {
@@ -154,7 +171,7 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
         if let leader = self.indicatorTableDict[leaderKey] {
             leader.followerIndicatorTableDict[follower.name] = distance
             follower.leaderIndicatorKey = leaderKey
-            follower.leaderDistance = self.locationMapping.distanceReal2Draw(distance)
+            follower.leaderDistance = distance
             
             //調整連結距離
             let offset = self.requestChange(follower, translate: CGPoint.zero)
@@ -209,62 +226,6 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
         UIView.animate(withDuration: 0.25) {
             block()
         }
-    }
-    
-    //MARK: -
-    func addLocationIndicatorToContainerView(_ locationIndicator : LocationIndicatorView) {
-        locationIndicator.delegate = self
-        self.containerView.addSubview(locationIndicator)
-        
-        if locationIndicator.name.isEmpty {
-            fatalError("locationIndicator name isEmpty")
-        }
-        self.indicatorTableDict[locationIndicator.name] = locationIndicator
-    }
-    
-    func printPoints() {
-        for (_, view) in self.indicatorTableDict {
-            var point = view.convert(view.locationPoint(), to: self.containerView)
-            point = self.locationMapping.pointDraw2Real(point)
-            print("\(view.name) : \(point.x) , \(point.y)")
-        }
-    }
-    
-    //MARK: - Draw
-    @IBOutlet var drawView : DrawView!
-    var pointKeyListArray = [[String]]() {
-        didSet {
-            self.updateCurve()
-        }
-    }
-    
-    func updateCurve() {
-        
-        var pointListArray = [[CGPoint]]()
-        
-        for pointKeyList in self.pointKeyListArray {
-            
-            var pointList = [CGPoint]()
-            for pointKey in pointKeyList {
-                
-                if let view = self.indicatorTableDict[pointKey] {
-                    let point = view.convert(view.locationPoint(), to: self.containerView)
-                    pointList.append(point)
-                }
-                else {
-                    pointList = [CGPoint]()
-                    print("PointKey: \(pointKey) not found")
-                    break
-                }
-            }
-            
-            if pointList.count > 0 {
-                pointListArray.append(pointList)
-            }
-        }
-        
-        drawView.pointListArray = pointListArray
-        self.drawView.setNeedsDisplay()
     }
 }
 

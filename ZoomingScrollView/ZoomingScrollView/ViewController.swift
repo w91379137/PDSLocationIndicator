@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,
+LocationBoardViewControllerDelegate {
     
     let drawWidth =
         (UIScreen.main.bounds.width - 10) *
@@ -29,14 +30,14 @@ class ViewController: UIViewController {
         }
     }
     
-    lazy var boardViewController : LocationIndicatorBoardViewController = {
+    lazy var boardViewController : LocationBoardViewController = {
         let boardViewController =
             UIStoryboard(name: "Main",
-                         bundle: nil).instantiateViewController(withIdentifier: "LocationIndicatorBoardViewController")
-            as! LocationIndicatorBoardViewController
+                         bundle: nil).instantiateViewController(withIdentifier: "LocationBoardViewController")
+            as! LocationBoardViewController
         
-        boardViewController.locationMapping = self.locationMapping
         boardViewController.image = self.image
+        boardViewController.delegate = self
         
         return boardViewController
     }()
@@ -79,11 +80,11 @@ class ViewController: UIViewController {
             locationIndicator.pointerAngle = angle
             locationIndicator.set(size: controlSize, pointTo: point)
             
-            self.boardViewController.addLocationIndicatorToContainerView(locationIndicator)
+            self.boardViewController.addLocationIndicator(locationIndicator)
             pointKeyList.append(locationIndicator.name)
         }
         
-        self.boardViewController.pointKeyListArray = [pointKeyList]
+        self.pointKeyListArray = [pointKeyList]
     }
     
     func demo16Points() {
@@ -103,7 +104,7 @@ class ViewController: UIViewController {
                 locationIndicator.pointerAngle = Double((index_x + index_y * 4) * 30)
                 locationIndicator.set(size: controlSize, pointTo: point)
                 
-                self.boardViewController.addLocationIndicatorToContainerView(locationIndicator)
+                self.boardViewController.addLocationIndicator(locationIndicator)
                 pointKeyList.append(locationIndicator.name)
             }
             pointKeyListArray.append(pointKeyList)
@@ -116,21 +117,80 @@ class ViewController: UIViewController {
         locationIndicator.name = "F_P_0_0"
         locationIndicator.set(size: controlSize, pointTo: point)
         
-        self.boardViewController.addLocationIndicatorToContainerView(locationIndicator)
+        self.boardViewController.addLocationIndicator(locationIndicator)
         
         //Position_0_0 connect
-        self.boardViewController.connect(leaderKey: "P_0_0",
+        self.boardViewController.connect(leaderKey : "P_0_0",
                                          follower: locationIndicator,
-                                         distance: 100)
+                                         distance: self.locationMapping.distanceReal2Draw(100))
         
         //連線
         pointKeyListArray.append(["F_P_0_0", "P_0_0"])
         pointKeyListArray.append(["P_0_0", "P_1_1", "P_2_2", "P_3_3"])
-        self.boardViewController.pointKeyListArray = pointKeyListArray
+        self.pointKeyListArray = pointKeyListArray
     }
     
     //MARK: - IBAction
     @IBAction func printPoints() {
-        self.boardViewController.printPoints()
+        for (_, view) in self.boardViewController.indicatorTableDict {
+            var point = view.convert(view.locationPoint(),
+                                     to: self.boardViewController.containerView)
+            point = self.locationMapping.pointDraw2Real(point)
+            print("\(view.name) : \(point.x) , \(point.y)")
+        }
+    }
+    
+    //MARK: - LocationBoardViewControllerDelegate
+    func pointsUpdate(_ locationBoardViewController : LocationIndicatorViewDelegate) {
+        self.updateCurve()
+    }
+    
+    //MARK: - Draw
+    lazy var drawView : DrawView = {
+        let addToView = self.boardViewController.imageView!
+        
+        let drawView = DrawView(frame : addToView.bounds)
+        drawView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        drawView.backgroundColor = UIColor.clear
+        drawView.isUserInteractionEnabled = false
+        
+        addToView.addSubview(drawView)
+        return drawView
+    }()
+    
+    var pointKeyListArray = [[String]]() {
+        didSet {
+            self.updateCurve()
+        }
+    }
+    
+    func updateCurve() {
+        
+        var pointListArray = [[CGPoint]]()
+        
+        for pointKeyList in self.pointKeyListArray {
+            
+            var pointList = [CGPoint]()
+            for pointKey in pointKeyList {
+                
+                if let view = self.boardViewController.indicatorTableDict[pointKey] {
+                    let point = view.convert(view.locationPoint(),
+                                             to: self.boardViewController.containerView)
+                    pointList.append(point)
+                }
+                else {
+                    pointList = [CGPoint]()
+                    print("PointKey: \(pointKey) not found")
+                    break
+                }
+            }
+            
+            if pointList.count > 0 {
+                pointListArray.append(pointList)
+            }
+        }
+        
+        drawView.pointListArray = pointListArray
+        self.drawView.setNeedsDisplay()
     }
 }
