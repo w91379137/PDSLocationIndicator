@@ -16,6 +16,8 @@ let scaleBig = CGFloat(1)
 class LocationIndicatorBoardViewController: UIViewController,
 UIScrollViewDelegate, LocationIndicatorViewDelegate {
     
+    var locationMapping = LocationMapping(scale: 1)
+    
     @IBOutlet var scrollView : UIScrollView! {
         didSet {
             self.scrollView.minimumZoomScale = scaleNormal
@@ -32,7 +34,18 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     
     var indicatorTableDict = [String : LocationIndicatorView]()
     
-    @IBOutlet var imageView : UIImageView!
+    var image : UIImage? = nil {
+        didSet {
+            if isViewLoaded {
+                self.imageView.image = self.image
+            }
+        }
+    }
+    @IBOutlet var imageView : UIImageView! {
+        didSet {
+            self.imageView.image = self.image
+        }
+    }
     
     enum ZoomStatus {
         case normal
@@ -141,7 +154,7 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
         if let leader = self.indicatorTableDict[leaderKey] {
             leader.followerIndicatorTableDict[follower.name] = distance
             follower.leaderIndicatorKey = leaderKey
-            follower.leaderDistance = self.convertRealLength2Board(distance)
+            follower.leaderDistance = self.locationMapping.distanceReal2Draw(distance)
             
             //調整連結距離
             let offset = self.requestChange(follower, translate: CGPoint.zero)
@@ -203,7 +216,7 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
                               realPoint : CGPoint,
                               size : CGSize) {
         let boardPoint =
-            self.convertRealPoint2Board(realPoint)
+            self.locationMapping.pointReal2Draw(realPoint)
         let offset =
             locationIndicator.locationPoint(bounds: CGRect(origin: CGPoint.zero,
                                                            size: size))
@@ -228,34 +241,9 @@ UIScrollViewDelegate, LocationIndicatorViewDelegate {
     func printPoints() {
         for (_, view) in self.indicatorTableDict {
             var point = view.convert(view.locationPoint(), to: self.containerView)
-            point = self.convertBoard2RealPoint(point)
+            point = self.locationMapping.pointDraw2Real(point)
             print("\(view.name) : \(point.x) , \(point.y)")
         }
-    }
-    
-    //MARK: - Convert
-    func convertRealLength2Board(_ value : CGFloat) -> CGFloat {
-        let boardSize = self.containerView.bounds.size
-        let imageSize = self.imageView.image!.size
-        return value * boardSize.width / imageSize.width
-    }
-    
-    func convertRealPoint2Board(_ point : CGPoint) -> CGPoint {
-        let x = self.convertRealLength2Board(point.x)
-        let y = self.convertRealLength2Board(point.y)
-        return CGPoint(x: x, y: y)
-    }
-    
-    func convertBoard2RealLength(_ value : CGFloat) -> CGFloat {
-        let boardSize = self.containerView.bounds.size
-        let imageSize = self.imageView.image!.size
-        return value / boardSize.width * imageSize.width
-    }
-    
-    func convertBoard2RealPoint(_ point : CGPoint) -> CGPoint {
-        let x = self.convertBoard2RealLength(point.x)
-        let y = self.convertBoard2RealLength(point.y)
-        return CGPoint(x: x, y: y)
     }
     
     //MARK: - Draw

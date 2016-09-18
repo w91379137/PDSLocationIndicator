@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11198.2" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,8 +36,8 @@
                         <constraints>
                             <constraint firstItem="4KN-lU-LUk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CLS-SO-f40"/>
                             <constraint firstItem="HYt-po-K5d" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Wnm-hw-YO7"/>
-                            <constraint firstItem="HYt-po-K5d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="a0g-h0-my0"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="HYt-po-K5d" secondAttribute="trailing" constant="5" id="rNl-fK-zPv"/>
+                            <constraint firstItem="HYt-po-K5d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="5" id="a0g-h0-my0"/>
+                            <constraint firstAttribute="trailing" secondItem="HYt-po-K5d" secondAttribute="trailing" constant="5" id="rNl-fK-zPv"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4KN-lU-LUk" secondAttribute="bottom" constant="50" id="xHH-xr-7X1"/>
                         </constraints>
                     </view>
@@ -66,7 +65,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P78-AW-TJg">
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lattice.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Us-fr-XBN"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Us-fr-XBN"/>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1j0-he-n7B" customClass="DrawView" customModule="ZoomingScrollView" customModuleProvider="target">
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
@@ -120,7 +119,4 @@
             <point key="canvasLocation" x="-75" y="-296"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="lattice.png" width="800" height="800"/>
-    </resources>
 </document>

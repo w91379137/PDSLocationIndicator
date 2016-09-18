@@ -36,10 +36,26 @@ class LocationIndicatorView: UIView {
         self.addSubview(imageView)
         imageView.frame = self.bounds
         imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        self.bringSubview(toFront: self.nameLabel)
         return imageView
     }()
     
-    var name = String()
+    lazy var nameLabel : UILabel = {
+        let nameLabel = UILabel(frame: CGRect.zero)
+        nameLabel.textAlignment = .center
+        nameLabel.textColor = UIColor.red
+        
+        self.addSubview(nameLabel)
+        nameLabel.frame = self.bounds
+        nameLabel.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        return nameLabel
+    }()
+    
+    var name = String() {
+        didSet {
+            self.nameLabel.text = self.name
+        }
+    }
     
     var pointerAngle = 0.0 {
         didSet {

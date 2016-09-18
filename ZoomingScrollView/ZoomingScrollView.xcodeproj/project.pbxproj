@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F83AD3101D8EE7D400A6840E /* LocationMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AD30F1D8EE7D400A6840E /* LocationMapping.swift */; };
 		F87698891D796B4300F6990A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87698881D796B4300F6990A /* AppDelegate.swift */; };
 		F876988B1D796B4300F6990A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876988A1D796B4300F6990A /* ViewController.swift */; };
 		F876988E1D796B4300F6990A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F876988C1D796B4300F6990A /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F83AD30F1D8EE7D400A6840E /* LocationMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationMapping.swift; sourceTree = "<group>"; };
 		F87698851D796B4300F6990A /* ZoomingScrollView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZoomingScrollView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87698881D796B4300F6990A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F876988A1D796B4300F6990A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,8 +74,9 @@
 				F876988C1D796B4300F6990A /* Main.storyboard */,
 				F87698881D796B4300F6990A /* AppDelegate.swift */,
 				F876988A1D796B4300F6990A /* ViewController.swift */,
-				F8F2473C1D7B533D00DB8B5B /* LocationIndicatorBoardViewController.swift */,
 				F88841DC1D7D26B900BCB423 /* DrawView.swift */,
+				F83AD30F1D8EE7D400A6840E /* LocationMapping.swift */,
+				F8F2473C1D7B533D00DB8B5B /* LocationIndicatorBoardViewController.swift */,
 				F8F2473A1D7B39BF00DB8B5B /* LocationIndicatorView.swift */,
 				F87698941D796B4300F6990A /* Info.plist */,
 			);
@@ -171,6 +174,7 @@
 				F8F2473B1D7B39BF00DB8B5B /* LocationIndicatorView.swift in Sources */,
 				F8F2473D1D7B533D00DB8B5B /* LocationIndicatorBoardViewController.swift in Sources */,
 				F87698891D796B4300F6990A /* AppDelegate.swift in Sources */,
+				F83AD3101D8EE7D400A6840E /* LocationMapping.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
