@@ -14,7 +14,7 @@ let scaleBig = CGFloat(1)
 //在 Normal 1 Big 5 的情況 LocationView 會拖曳困難
 
 @objc protocol LocationBoardViewControllerDelegate : NSObjectProtocol {
-    func pointsUpdate(_ locationBoardViewController : LocationIndicatorViewDelegate)
+    func pointsUpdate(_ locationBoardViewController : LocationBoardViewController)
 }
 
 class LocationBoardViewController: UIViewController,

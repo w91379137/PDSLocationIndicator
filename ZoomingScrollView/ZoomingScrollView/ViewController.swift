@@ -141,7 +141,7 @@ LocationBoardViewControllerDelegate {
     }
     
     //MARK: - LocationBoardViewControllerDelegate
-    func pointsUpdate(_ locationBoardViewController : LocationIndicatorViewDelegate) {
+    func pointsUpdate(_ locationBoardViewController : LocationBoardViewController) {
         self.updateCurve()
     }
     
