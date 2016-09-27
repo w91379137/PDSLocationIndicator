@@ -10,7 +10,11 @@ import UIKit
 
 class DrawView: UIView {
     
-    var pointListArray = [[CGPoint]]()
+    var pointListArray = [[CGPoint]]() {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
     
     //http://www.jianshu.com/p/d64b0abef349
     override func draw(_ rect: CGRect) {
@@ -46,6 +50,7 @@ extension CGContext {
     }
     
     //MARK : - Curve
+    //https://medium.com/@ramshandilya/draw-smooth-curves-through-a-set-of-points-in-ios-34f6d73c8f9#.404ifx84w
     func addCurveToConnect(pointList : [CGPoint]) {
         
         let path = UIBezierPath()
