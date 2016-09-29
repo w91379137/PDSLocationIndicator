@@ -8,7 +8,11 @@
 
 import UIKit
 
-class DrawView: UIView {
+class PDSDrawLineView: UIView {
+    
+    var strokeColor : UIColor? = nil
+    var lineWidth : CGFloat = 3
+    var lineDash : (phase: CGFloat, lengths: [CGFloat])? = nil
     
     var pointListArray = [[CGPoint]]() {
         didSet {
@@ -21,9 +25,9 @@ class DrawView: UIView {
         super.draw(rect)
         
         let context = UIGraphicsGetCurrentContext()!
-        context.setLineWidth(3)
-        context.setStrokeColor(UIColor.lightGray.cgColor)
-        context.setLineDash(phase: 0, lengths: [8, 16, 8, 24])
+        context.setLineWidth(self.lineWidth)
+        if let color = self.strokeColor { context.setStrokeColor(color.cgColor) }
+        if let lineDash = self.lineDash { context.setLineDash(phase: lineDash.phase, lengths: lineDash.lengths) }
         
         for pointList in self.pointListArray {
             context.addLineToConnect(pointList: pointList)

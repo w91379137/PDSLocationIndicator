@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C9BB534E67EA361A932FD05192183DA144F98F44",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C9BB534E67EA361A932FD05192183DA144F98F44" : 9223372036854775807,
+    "6F9CEB7005A74E6DB4361349EA0712A634CBBAAF" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5D640859-4080-49D9-88DA-CC7439DD3F04",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C9BB534E67EA361A932FD05192183DA144F98F44" : "PDSLocationIndicator\/",
+    "6F9CEB7005A74E6DB4361349EA0712A634CBBAAF" : "..\/.."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ZoomingScrollView",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ZoomingScrollView\/ZoomingScrollView.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:spe3d\/SPELandMarkControl.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6F9CEB7005A74E6DB4361349EA0712A634CBBAAF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:w91379137\/PDSLocationIndicator.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C9BB534E67EA361A932FD05192183DA144F98F44"
+    }
+  ]
+}

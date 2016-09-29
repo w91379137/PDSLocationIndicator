@@ -14,8 +14,9 @@
 		F87698901D796B4300F6990A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F876988F1D796B4300F6990A /* Assets.xcassets */; };
 		F87698931D796B4300F6990A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87698911D796B4300F6990A /* LaunchScreen.storyboard */; };
 		F876989F1D7972E800F6990A /* point.png in Resources */ = {isa = PBXBuildFile; fileRef = F876989E1D7972E800F6990A /* point.png */; };
-		F88841DD1D7D26B900BCB423 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88841DC1D7D26B900BCB423 /* DrawView.swift */; };
 		F8C655641D8D967100F111EA /* point80.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C655631D8D967100F111EA /* point80.png */; };
+		F8ED217B1D9D03CD00D58EE4 /* PDSDrawDotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ED21791D9D03CD00D58EE4 /* PDSDrawDotView.swift */; };
+		F8ED217C1D9D03CD00D58EE4 /* PDSDrawLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ED217A1D9D03CD00D58EE4 /* PDSDrawLineView.swift */; };
 		F8F247391D7B2E3100DB8B5B /* lattice.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F247381D7B2E3100DB8B5B /* lattice.png */; };
 		F8F2473B1D7B39BF00DB8B5B /* LocationIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F2473A1D7B39BF00DB8B5B /* LocationIndicatorView.swift */; };
 		F8F2473D1D7B533D00DB8B5B /* LocationBoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F2473C1D7B533D00DB8B5B /* LocationBoardController.swift */; };
@@ -31,8 +32,9 @@
 		F87698921D796B4300F6990A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F87698941D796B4300F6990A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F876989E1D7972E800F6990A /* point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = point.png; sourceTree = "<group>"; };
-		F88841DC1D7D26B900BCB423 /* DrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		F8C655631D8D967100F111EA /* point80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = point80.png; sourceTree = "<group>"; };
+		F8ED21791D9D03CD00D58EE4 /* PDSDrawDotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDSDrawDotView.swift; sourceTree = "<group>"; };
+		F8ED217A1D9D03CD00D58EE4 /* PDSDrawLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDSDrawLineView.swift; sourceTree = "<group>"; };
 		F8F247381D7B2E3100DB8B5B /* lattice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lattice.png; sourceTree = "<group>"; };
 		F8F2473A1D7B39BF00DB8B5B /* LocationIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationIndicatorView.swift; sourceTree = "<group>"; };
 		F8F2473C1D7B533D00DB8B5B /* LocationBoardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationBoardController.swift; sourceTree = "<group>"; };
@@ -74,7 +76,8 @@
 				F876988C1D796B4300F6990A /* Main.storyboard */,
 				F87698881D796B4300F6990A /* AppDelegate.swift */,
 				F876988A1D796B4300F6990A /* ViewController.swift */,
-				F88841DC1D7D26B900BCB423 /* DrawView.swift */,
+				F8ED21791D9D03CD00D58EE4 /* PDSDrawDotView.swift */,
+				F8ED217A1D9D03CD00D58EE4 /* PDSDrawLineView.swift */,
 				F83AD30F1D8EE7D400A6840E /* LocationMapping.swift */,
 				F8F2473C1D7B533D00DB8B5B /* LocationBoardController.swift */,
 				F8F2473A1D7B39BF00DB8B5B /* LocationIndicatorView.swift */,
@@ -170,10 +173,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F876988B1D796B4300F6990A /* ViewController.swift in Sources */,
-				F88841DD1D7D26B900BCB423 /* DrawView.swift in Sources */,
 				F8F2473B1D7B39BF00DB8B5B /* LocationIndicatorView.swift in Sources */,
 				F8F2473D1D7B533D00DB8B5B /* LocationBoardController.swift in Sources */,
+				F8ED217C1D9D03CD00D58EE4 /* PDSDrawLineView.swift in Sources */,
 				F87698891D796B4300F6990A /* AppDelegate.swift in Sources */,
+				F8ED217B1D9D03CD00D58EE4 /* PDSDrawDotView.swift in Sources */,
 				F83AD3101D8EE7D400A6840E /* LocationMapping.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

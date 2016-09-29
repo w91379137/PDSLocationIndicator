@@ -146,10 +146,10 @@ LocationBoardViewControllerDelegate {
     }
     
     //MARK: - Draw
-    lazy var drawView : DrawView = {
+    lazy var drawView : PDSDrawLineView = {
         let addToView = self.boardViewController.imageView!
         
-        let drawView = DrawView(frame : addToView.bounds)
+        let drawView = PDSDrawLineView(frame : addToView.bounds)
         drawView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         drawView.backgroundColor = UIColor.clear
         drawView.isUserInteractionEnabled = false
