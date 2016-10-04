@@ -30,7 +30,7 @@ class PDSDrawLineView: UIView {
         if let lineDash = self.lineDash { context.setLineDash(phase: lineDash.phase, lengths: lineDash.lengths) }
         
         for pointList in self.pointListArray {
-            context.addCurve2ToConnect(pointList: pointList)
+            context.addLineToConnect(pointList: pointList)
         }
     }
 }
